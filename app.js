@@ -7,6 +7,8 @@ you might even include your name and the date */
 
 */
 
+var outputList = document.getElementById("list-output");
+
 class bookCover {
 
     /* this class returns the bookcover for an isbn number in correct html using the openlibrary api*/
@@ -89,28 +91,44 @@ async function getBookDetail(url_a, key, isbn, url_b) {
 
 }
 
-main();
-
-// we need to be able to wait for processing to happen - so we need to make our function asynchronis
 async function main() {
-
-    // this is the list of isbn numbers we want information for
-    var isbnarr = ['0261102214', '9780547773704'];
+    outputList.innerHTML = ""; //empty html output
     // this is the list of books we are going to create
     var bookarr = []
 
-    // the normal for loop we have looked at so far
-    for (let i = 0; i < isbnarr.length; i++) {
-        let book = new bookDetail(isbnarr[i], "M");
+    // loop for every element in array isbnlist
+    for (let i = 0; i < isbnlist.length; i++) {
+        let book = new bookDetail(isbnlist[i], "M");
         await book.getDetail();
         bookarr.push(book);
     }
 
     // the for (variable of iterable) will loop through each item in an array
     for (x of bookarr) {
-        document.write(x.cover());
-        document.write(x.getAuthor());
+        author = x.getAuthor();
+        bookImg = x.cover();
+        outputList.innerHTML += '<div class="row mt-4">' +
+        formatOutput(bookImg, author) +
+        '</div>';
     }
+
+    function formatOutput(bookImg, author) {
+        var htmlCard = `
+       
+        <div class="col-lg-6">
+          <div class="card" style="">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <p> ${bookImg} </p>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <p class="card-text">Author: ${author}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+        return htmlCard;
+      }
 }
-
-

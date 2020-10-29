@@ -1,45 +1,40 @@
+/* Programming for Design group Project 2 */
+
+/* Group Members Moudar and Johannes */
+
+/* 29th of October 2020 */
+
+/* body styling */ 
 
 body {
   background-color: #222;
   /* Full height */
   height: 100%;
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
+/* center class styling */ 
 .center {
   margin: auto;
   margin-top: 100px;
 }
 
+/* header styling */ 
 #header {
   font-family: 'Righteous', sans-serif;
   font-size: 3rem;
   color: white;
 }
 
+/* h2 styling */ 
 h2 {
   font-family: 'Righteous', sans-serif;
+  color: #38AECC;
 }
 
+/* flex container */ 
 .flex-container {
-  /* We first create a flex layout context */
   display: flex;
   justify-content: center;
   
 }
 
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.book-list {
-  margin-top: 50px;
-  visibility: hidden;
-}

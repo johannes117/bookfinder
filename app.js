@@ -22,10 +22,6 @@ class bookCover {
         this.url_b = '.jpg" />'
     }
 
-    size(val = "S") {
-        this.size = '-' + val;
-    }
-
     display() {
 
         // return the correct html for this book cover
@@ -48,10 +44,6 @@ class bookDetail {
         this.url_b = '&format=json&jscmd=data';
         /* 'https://openlibrary.org/api/books?bibkeys=ISBN:0201558025&format=json' */
         this.detail = "";
-    }
-
-    size(val = "S") {
-        this.bc.size(val);
     }
 
     cover() {

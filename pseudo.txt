@@ -1,4 +1,5 @@
 
+// Pseudocode for app.js file //
 create a variable called outputList equal to a html element with an Id of "list-output"
 
 create a class called bookCover {
@@ -95,3 +96,49 @@ create an async await function main() {
             return the value of the variable htmlCard
     }
 }
+
+
+
+
+// Pseudocode for HTML file //
+set type of Document to HTML
+
+set the title to "Project 2 Book Finder" 
+
+create the body:
+  create a container
+    create a header with text "Project 2 ISBN Search Website" 
+      create a blue button which is centered on the page with text "Click me to search ISBN numbers"
+      Add a break for spacing
+      Add text subheading "Search Result" 
+      create div with id "list-output" which will update with htmlCards when button is pressed
+  close container
+  link bootstrap
+  link style.css 
+  link app.js 
+  link isbn.js 
+close body container
+
+End HTML Document
+
+
+
+// CSS Pseudocode //
+Body with height of 100% and background colour of dark grey
+
+center: 
+Set margin to auto
+add 100px padding to the top
+
+header: 
+make font-family: righteous, san serif
+make font size 3rem
+make color white
+
+h2: 
+make font-family: righteous, san serif
+make color: blue
+
+flex-container:
+display flex
+center content

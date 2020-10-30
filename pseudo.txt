@@ -2,82 +2,76 @@
 // Pseudocode for app.js file //
 create a variable called outputList equal to a html element with an Id of "list-output"
 
-create a class called bookCover {
+create a class called bookCover 
 
-    create a constructor function with keywords (isbn, size = 'S', key = 'isbn'){
+    create a constructor function with keywords (isbn, size = 'S', key = 'isbn')
         store isbn in this.isbn
         store size + '-' in this.size
         store key + "/" in this.key
         store '<img src="http://covers.openlibrary.org/b/' in this.url_a
         store '.jpg" />' in this.url_b  
-    }
-
-    create function display()  {
+    
+    create function display()  
     return concatenation of this.url_a, this.key, this.isbn, this.size and this.url_b
-    }
-}
+    
 
-create a class called bookDetail {
+create a class called bookDetail 
 
-     create a constructor function with keywords (isbn, size = 'S', key = 'isbn'){
+     create a constructor function with keywords (isbn, size = 'S', key = 'isbn')
         store isbn in this.isbn
         convert all characters in key to uppercase and add ":" and store in this.key
         new bookCover with inputs (isbn, size, key) stored in this.bc
         store 'https://openlibrary.org/api/books?bibkeys=' in this.url_a
         store '&format=json&jscmd=data' in this.url_b
         store an empty string in this.detail 
-    }
+    
 
-    create function cover() {
+    create function cover() 
         return output from display() function as this.bc.display()
-    }
 
-    create an async await function getDetail(){
+    create an async await function getDetail()
         create variable "dets" which waits for the getBookDetail function with inputs this.url_a, this.key, this.isbn and this.url
         store dets[this.key and this.isbn] in this.detail 
-    }
 
-    create getAuthor() function {
+    create getAuthor() function 
         get the author from the json object by returning ['authors'][0]['name'] to this.detail
-    }
 
-}
 
-create an async await function getBookDetail with inputs (url_a, key, isbn, url_b){
+create an async await function getBookDetail with inputs (url_a, key, isbn, url_b)
     create a variable url which is equal to the concatenation of url_a, key, isbn and url_b
 
-    try to {
+    try to 
         wait for fetch(url) to store value in constant resp
         wait for resp.json() to store value in constant jrep
         log value of jres in the console
         return value of jres
-    }
-    otherwise{
+
+    otherwise
         throw an error
-        }
+        
 
-}
-
-create an async await function main() {
+create an async await function main() 
     assign outputList.innerHTML to an empty string //empty html output
     create a an array called bookarr
 
-    //loop for every element in array isbnlist
-    create variable i and loop if i is less than the length of isbnlist then increment the value of i by 1{
+    loop for every element in array isbnlist
+      create variable i and loop if i is less than the length of isbnlist then increment the value of i by 1{
         create a variable book and store a new bookDetail with inputs/keywords(isbnlist[current i value], "M")
         wait for book.getDetail()
         push value of book to bookarr 
-    }
+    
 
-    loop for every element in bookarr{
-        store current element.getAuthor() in author
-        store current element.cover() in bookImg
+    loop for every element in bookarr
+        store value returned from getAuthor() in author
+        store value returned from cover() in bookImg
+        store value returned from getPublisher() in publisher
+        store value returned from getTitle() in title
+        store value returned from getPages() in pages
         make outputList.innerHTML equal to <div class="row mt-4">' +
-        formatOutput(bookImg, author) +
+        formatOutput(bookImg, author, publisher, title, numPages) +
         '</div>';
-    }
 
-    create a function formatOutput with inputs (bookImg, author) {
+    create a function formatOutput with inputs (bookImg, author, publisher, title, numPages) 
         create a variable htmlCard with the following format: 
         `<div class="col-lg-6">
           <div class="card" style="">
@@ -87,17 +81,16 @@ create an async await function main() {
               </div>
               <div class="col-md-8">
                 <div class="card-body">
+                  <p class="card-text">Title: ${title}</p>
                   <p class="card-text">Author: ${author}</p>
+                  <p class="card-text">Publisher: ${publisher}</p>
+                  <p class="card-text">Pages: ${numPages}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>`
             return the value of the variable htmlCard
-    }
-}
-
-
 
 
 // Pseudocode for HTML file //

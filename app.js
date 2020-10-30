@@ -52,12 +52,24 @@ class bookDetail {
     }
 
     getAuthor() {
-
         // Gets the author from the json object
         return this.detail['authors'][0]['name'];
-        
     }
 
+    getTitle() {      
+        // Gets the title from the json object                                            
+        return this.detail['title'];
+    }
+
+    getPages(){     
+        // Gets the number of pages from the json object                                     
+        return this.detail['number_of_pages'];
+    }
+
+    getPublishers(){
+        // Gets the publisher from the json object
+        return this.detail['publishers'][0]['name'];                        
+    }
 
 }
 
@@ -101,16 +113,22 @@ async function main() {
     for (x of bookarr) {
         //Stores the String returned from getAuthor in author
         author = x.getAuthor();
-        //Stores HTML returned from cover() in bookImg
+        //Stores correct HTML returned from cover() in bookImg
         bookImg = x.cover();
+        //Stores Publisher returned from getPublishers()
+        publisher = x.getPublishers();
+        //Stores Title returned from getTitle()
+        title = x.getTitle();
+        //Stores Page Numbers returned from getPages()
+        numPages = x.getPages();
         //Creates a new Row, and adds a new htmlCard to the page
         outputList.innerHTML += '<div class="row mt-4">' +
-        formatOutput(bookImg, author) +
+        formatOutput(bookImg, author, publisher, title, numPages) +
         '</div>';
     }
 
     // formatOutput function which takes bookImg, and author inputs and builds a htmlCard
-    function formatOutput(bookImg, author) {
+    function formatOutput(bookImg, author, publisher, title, numPages) {
         // HTML for htmlCard
         var htmlCard = `
         <div class="col-lg-6">
@@ -121,7 +139,10 @@ async function main() {
               </div>
               <div class="col-md-8">
                 <div class="card-body">
+                  <p class="card-text">Title: ${title}</p>
                   <p class="card-text">Author: ${author}</p>
+                  <p class="card-text">Publisher: ${publisher}</p>
+                  <p class="card-text">Pages: ${numPages}</p>
                 </div>
               </div>
             </div>
